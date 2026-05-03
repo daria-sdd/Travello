@@ -1,1 +1,20 @@
-/Users/dariashmygovskaya/Desktop/Travello/.gradle
+.gradle/
+build/
+.env
+secrets/firebase.json
+secrets/*.p8
+*.p8
+
+# macOS
+.DS_Store
+
+# Xcode
+xcuserdata/
+*.xccheckout
+*.moved-aside
+DerivedData/
+
+# Python
+__pycache__/
+*.pyc
+.venv/

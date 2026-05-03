@@ -51,15 +51,33 @@ final class AppState: ObservableObject {
     }
 
     init() {
+        // Пробрасываем 401 на выход из аккаунта
+        APIClient.shared.onUnauthorized = { [weak self] in
+            Task { @MainActor in self?.signOut() }
+        }
         Task { await checkAuth() }
     }
 
     @MainActor
     func checkAuth() async {
-        // TODO: проверить Keychain на наличие JWT
-        // и валидность токена через API call /auth/me
-        try? await Task.sleep(for: .milliseconds(300))
-        authStage = .unauthenticated
+        guard KeychainService.hasToken else {
+            authStage = .unauthenticated
+            return
+        }
+
+        do {
+            // Верифицируем токен через /auth/me
+            let _: UserDTO = try await APIClient.shared.request(.authMe)
+            let hasSeenOnboarding = UserDefaults.standard.bool(forKey: "hasSeenOnboarding")
+            authStage = hasSeenOnboarding ? .authenticated : .onboarding
+        } catch APIError.unauthorized {
+            KeychainService.clearAll()
+            authStage = .unauthenticated
+        } catch {
+            // Оффлайн или временная ошибка — пускаем внутрь с кешированным токеном
+            let hasSeenOnboarding = UserDefaults.standard.bool(forKey: "hasSeenOnboarding")
+            authStage = hasSeenOnboarding ? .authenticated : .onboarding
+        }
     }
 
     @MainActor
@@ -69,12 +87,14 @@ final class AppState: ObservableObject {
 
     @MainActor
     func didCompleteOnboarding() {
+        UserDefaults.standard.set(true, forKey: "hasSeenOnboarding")
         authStage = .authenticated
     }
 
     @MainActor
     func signOut() {
-        // TODO: очистить Keychain
+        KeychainService.clearAll()
+        APIClient.shared.onUnauthorized = nil
         authStage = .unauthenticated
     }
 }

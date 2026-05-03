@@ -7,15 +7,12 @@
 
 import SwiftUI
 
+// ContentView не используется напрямую — точка входа это TravelloApp → RootView.
+// Оставляем для Preview.
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+        RootView()
+            .environmentObject(AppState())
     }
 }
 
