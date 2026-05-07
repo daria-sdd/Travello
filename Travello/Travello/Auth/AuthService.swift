@@ -1,4 +1,5 @@
 import Foundation
+import Combine
 import AuthenticationServices
 import CryptoKit
 
@@ -72,12 +73,12 @@ final class AuthService: NSObject, ObservableObject {
         let request = ExchangeRequest(
             appleIdentityToken: appleIdentityToken,
             nonce: nonce,
-            displayName: displayName,
+            displayName: displayName
         )
 
         let response: ExchangeResponse = try await APIClient.shared.request(
             .authExchange,
-            body: request,
+            body: request
         )
 
         // Сохраняем токены и user ID в Keychain
@@ -152,7 +153,7 @@ extension AuthService: ASAuthorizationControllerDelegate {
                 try await exchangeWithBackend(
                     appleIdentityToken: identityToken,
                     nonce: nonce,
-                    displayName: displayName,
+                    displayName: displayName
                 )
                 continuation?.resume(returning: true)
             } catch {
@@ -185,12 +186,15 @@ extension AuthService: ASAuthorizationControllerPresentationContextProviding {
     nonisolated func presentationAnchor(
         for controller: ASAuthorizationController
     ) -> ASPresentationAnchor {
-        // Возвращаем активное окно. На главном потоке.
-        DispatchQueue.main.sync {
+        #if os(iOS)
+        return DispatchQueue.main.sync {
             (UIApplication.shared.connectedScenes
-                .compactMap { ($0 as? UIWindowScene)?.windows.first(where: \.isKeyWindow) }
+                .compactMap { ($0 as? UIWindowScene)?.windows.first(where: { $0.isKeyWindow }) }
                 .first) ?? ASPresentationAnchor()
         }
+        #else
+        return ASPresentationAnchor()
+        #endif
     }
 }
 
@@ -212,12 +216,3 @@ enum AuthError: LocalizedError {
     }
 }
 
-// ============================================================
-// SMALL HELPER
-// ============================================================
-
-private extension String {
-    var nilIfEmpty: String? {
-        isEmpty ? nil : self
-    }
-}

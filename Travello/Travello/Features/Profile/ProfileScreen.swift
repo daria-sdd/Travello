@@ -1,4 +1,5 @@
 import SwiftUI
+import Combine
 
 // ============================================================
 // PROFILE SCREEN
@@ -76,7 +77,7 @@ private struct StatCell: View {
     var body: some View {
         VStack(spacing: 4) {
             Text(value)
-                .font(.custom("Fraunces-Medium", size: 22))
+                .font(.custom("Fraunces72pt-SemiBold", size: 22))
                 .foregroundColor(.Travello.terra)
             Text(label).eyebrowSmall()
         }
@@ -93,7 +94,7 @@ private struct ProfileCover: View {
     var body: some View {
         ZStack(alignment: .bottomLeading) {
             LinearGradient(
-                colors: [Color(uiColor: .init(hex: 0xF4D1A6)), .Travello.apricot],
+                colors: [Color(hex: 0xF4D1A6), .Travello.apricot],
                 startPoint: .topLeading, endPoint: .bottomTrailing
             )
             .frame(height: 150)
@@ -114,7 +115,7 @@ private struct ProfileCover: View {
             // Аватар
             Circle()
                 .fill(LinearGradient(
-                    colors: [Color.Travello.olive, Color(uiColor: .init(hex: 0x9FC4A8))],
+                    colors: [Color.Travello.olive, Color(hex: 0x9FC4A8)],
                     startPoint: .topLeading, endPoint: .bottomTrailing
                 ))
                 .frame(width: 64, height: 64)
@@ -248,17 +249,21 @@ struct SettingsScreen: View {
             }
             .background(Color.Travello.cream.ignoresSafeArea())
             .navigationTitle("")
+            #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
+            #endif
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text("Настройки").font(.Travello.h3).foregroundColor(.Travello.ink)
                 }
+                #if os(iOS)
                 ToolbarItem(placement: .topBarLeading) {
                     Button { dismiss() } label: {
                         Image(systemName: "xmark").font(.system(size: 13, weight: .medium))
                             .foregroundColor(.Travello.ink)
                     }
                 }
+                #endif
             }
         }
         .alert("Выйти из аккаунта?", isPresented: $showSignOutAlert) {

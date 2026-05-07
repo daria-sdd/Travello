@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+
+    <!-- ═══════════════════════════════════════════════
+         API URL — читается в APIClient.swift
+         Для разработки: http://localhost:8080
+         Для прода: https://api.yourdomain.com
+    ═══════════════════════════════════════════════ -->
+    <key>TRAVELLO_API_URL</key>
+    <string>http://localhost:8080</string>
+
+    <!-- ═══════════════════════════════════════════════
+         Разрешения (показываются пользователю)
+    ═══════════════════════════════════════════════ -->
+
+    <!-- Геолокация — для карт маршрута и рекомендаций рядом -->
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Travello использует геолокацию, чтобы показывать места и маршруты рядом с вами</string>
+
+    <!-- Камера — для фото в профиле или поездке -->
+    <key>NSCameraUsageDescription</key>
+    <string>Для загрузки фото в профиль и воспоминания о поездке</string>
+
+    <!-- Фотогалерея (чтение) -->
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Для выбора фото из галереи в профиль или в поездку</string>
+
+    <!-- Фотогалерея (запись) — если сохраняете маршруты как изображения -->
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>Для сохранения маршрута и воспоминаний в галерею</string>
+
+    <!-- ═══════════════════════════════════════════════
+         App Transport Security
+         Разрешаем localhost для локальной разработки.
+         В проде этот блок можно удалить.
+    ═══════════════════════════════════════════════ -->
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsLocalNetworking</key>
+        <true/>
+        <key>NSExceptionDomains</key>
+        <dict>
+            <key>localhost</key>
+            <dict>
+                <key>NSExceptionAllowsInsecureHTTPLoads</key>
+                <true/>
+            </dict>
+        </dict>
+    </dict>
+
+    <!-- ═══════════════════════════════════════════════
+         Шрифты (файлы должны лежать в Resources/Fonts/)
+         Fraunces — https://fonts.google.com/specimen/Fraunces
+         Inter    — https://fonts.google.com/specimen/Inter
+    ═══════════════════════════════════════════════ -->
+    <key>UIAppFonts</key>
+    <array>
+        <string>Fraunces_72pt-Light.ttf</string>
+        <string>Fraunces_72pt-Regular.ttf</string>
+        <string>Fraunces_72pt-SemiBold.ttf</string>
+        <string>Fraunces_72pt-LightItalic.ttf</string>
+        <string>Fraunces_72pt-Italic.ttf</string>
+        <string>Inter_28pt-Regular.ttf</string>
+        <string>Inter_28pt-Medium.ttf</string>
+        <string>Inter_28pt-SemiBold.ttf</string>
+    </array>
+
+    <!-- ═══════════════════════════════════════════════
+         URL Schemes — для диплинков (опционально)
+    ═══════════════════════════════════════════════ -->
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>travello</string>
+            </array>
+            <key>CFBundleURLName</key>
+            <string>Daria.Travello</string>
+        </dict>
+    </array>
+
+</dict>
+</plist>

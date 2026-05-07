@@ -17,69 +17,69 @@ extension Font {
         // ── Display & Headlines (Fraunces) ───────────────────
 
         /// Огромный заголовок: «travello», hero-надписи. 38pt.
-        static let display = Font.custom("Fraunces-Light", size: 38)
+        static let display = Font.custom("Fraunces72pt-Light", size: 38)
             .leading(.tight)
 
         /// H1 — главные заголовки экранов. 24pt.
-        static let h1 = Font.custom("Fraunces-Medium", size: 24)
+        static let h1 = Font.custom("Fraunces72pt-SemiBold", size: 24)
             .leading(.tight)
 
         /// H1 italic — акцентные части заголовков.
-        static let h1Italic = Font.custom("Fraunces-LightItalic", size: 24)
+        static let h1Italic = Font.custom("Fraunces72pt-LightItalic", size: 24)
             .leading(.tight)
 
         /// H2 — заголовки разделов. 18pt.
-        static let h2 = Font.custom("Fraunces-Medium", size: 18)
+        static let h2 = Font.custom("Fraunces72pt-SemiBold", size: 18)
 
         /// H3 — подзаголовки внутри карточек. 14pt.
-        static let h3 = Font.custom("Fraunces-Medium", size: 14)
+        static let h3 = Font.custom("Fraunces72pt-SemiBold", size: 14)
 
         /// Italic-подсказки и слоганы.
-        static let italic = Font.custom("Fraunces-LightItalic", size: 13)
+        static let italic = Font.custom("Fraunces72pt-LightItalic", size: 13)
 
         /// Italic мелкий — для тегов времени и метаданных.
-        static let italicSmall = Font.custom("Fraunces-LightItalic", size: 11)
+        static let italicSmall = Font.custom("Fraunces72pt-LightItalic", size: 11)
 
         /// Декоративный курсив для нумерации — 01, 02, 03.
-        static let numeral = Font.custom("Fraunces-LightItalic", size: 32)
+        static let numeral = Font.custom("Fraunces72pt-LightItalic", size: 32)
             .weight(.light)
 
         /// Большая декоративная нумерация — на hero-обложках.
-        static let numeralLarge = Font.custom("Fraunces-LightItalic", size: 60)
+        static let numeralLarge = Font.custom("Fraunces72pt-LightItalic", size: 60)
             .weight(.light)
 
         // ── Body (Inter) ─────────────────────────────────────
 
         /// Основной текст. 14pt.
-        static let body = Font.custom("Inter-Regular", size: 14)
+        static let body = Font.custom("Inter28pt-Regular", size: 14)
 
         /// Текст в карточках. 13pt.
-        static let bodySmall = Font.custom("Inter-Regular", size: 13)
+        static let bodySmall = Font.custom("Inter28pt-Regular", size: 13)
 
         /// Подписи и captions. 11pt.
-        static let caption = Font.custom("Inter-Regular", size: 11)
+        static let caption = Font.custom("Inter28pt-Regular", size: 11)
 
         /// Жирный body — для emphasized текста.
-        static let bodyBold = Font.custom("Inter-Medium", size: 14)
+        static let bodyBold = Font.custom("Inter28pt-Medium", size: 14)
 
         // ── Eyebrow (всё капсом, с tracking) ─────────────────
 
         /// Eyebrow — мелкие caps-надписи для секций.
         /// Tracking задаётся через `.kerning(...)` на View.
         /// Используй `.eyebrow()` modifier ниже.
-        static let eyebrow = Font.custom("Inter-Medium", size: 9)
+        static let eyebrow = Font.custom("Inter28pt-Medium", size: 9)
 
-        static let eyebrowSmall = Font.custom("Inter-Medium", size: 8)
+        static let eyebrowSmall = Font.custom("Inter28pt-Medium", size: 8)
 
         // ── Buttons ──────────────────────────────────────────
 
-        static let button = Font.custom("Inter-Medium", size: 12)
+        static let button = Font.custom("Inter28pt-Medium", size: 12)
             .uppercaseSmallCaps()
 
         // ── Numbers (для статистики и countdown) ─────────────
 
         /// Большие числа на hero — countdown, цифры в статистике.
-        static let bigNumber = Font.custom("Fraunces-LightItalic", size: 48)
+        static let bigNumber = Font.custom("Fraunces72pt-LightItalic", size: 48)
             .leading(.tight)
     }
 }
@@ -133,14 +133,14 @@ enum FontRegistrar {
 
     static func registerAll() {
         let fonts = [
-            "Fraunces-Light",
-            "Fraunces-Regular",
-            "Fraunces-Medium",
-            "Fraunces-LightItalic",
-            "Fraunces-RegularItalic",
-            "Inter-Regular",
-            "Inter-Medium",
-            "Inter-SemiBold",
+            "Fraunces_72pt-Light",
+            "Fraunces_72pt-Regular",
+            "Fraunces_72pt-SemiBold",
+            "Fraunces_72pt-LightItalic",
+            "Fraunces_72pt-Italic",
+            "Inter_28pt-Regular",
+            "Inter_28pt-Medium",
+            "Inter_28pt-SemiBold",
         ]
         for name in fonts {
             registerFont(name: name, ext: "ttf")

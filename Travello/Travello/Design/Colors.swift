@@ -3,7 +3,15 @@ import SwiftUI
 // ============================================================
 // COLORS
 // Палитра travello — кремово-терракотовая, тёплая.
-// Все цвета адаптивны к светлой / тёмной теме через UIColor.
+// Адаптивные цвета хранятся в Assets.xcassets (Any / Dark).
+// Статичные акценты задаются через hex прямо здесь.
+//
+// Как добавить цвет в Assets.xcassets:
+//   1. Открыть Assets.xcassets
+//   2. + → New Color Set
+//   3. Назвать как указано ниже (например "TravelloCream")
+//   4. В инспекторе: Appearances → Any, Dark
+//   5. Вставить hex для каждого варианта
 // ============================================================
 
 extension Color {
@@ -11,123 +19,68 @@ extension Color {
     enum Travello {
 
         // ── Backgrounds ──────────────────────────────────────
+        //  Name in Assets          Any (light)   Dark
+        //  TravelloCream           #FAF6F1       #1A1410
+        //  TravelloSand            #F5EBDC       #231C13
+        //  TravelloPaper           #FFFFFF       #2D2419
+        //  TravelloElevated        #FFFFFF       #3A2F22
 
-        /// Основной фон приложения. Кремовый днём, тёплый чёрный ночью.
-        static let cream = Color(uiColor: UIColor { trait in
-            trait.userInterfaceStyle == .dark
-                ? UIColor(hex: 0x1A1410)
-                : UIColor(hex: 0xFAF6F1)
-        })
-
-        /// Вторичный фон — для карточек и поверхностей.
-        static let sand = Color(uiColor: UIColor { trait in
-            trait.userInterfaceStyle == .dark
-                ? UIColor(hex: 0x231C13)
-                : UIColor(hex: 0xF5EBDC)
-        })
-
-        /// Бумага — приподнятые карточки, hero-блоки.
-        static let paper = Color(uiColor: UIColor { trait in
-            trait.userInterfaceStyle == .dark
-                ? UIColor(hex: 0x2D2419)
-                : UIColor(hex: 0xFFFFFF)
-        })
-
-        /// Высокая поверхность — модалки, шторки.
-        static let elevated = Color(uiColor: UIColor { trait in
-            trait.userInterfaceStyle == .dark
-                ? UIColor(hex: 0x3A2F22)
-                : UIColor(hex: 0xFFFFFF)
-        })
+        static let cream    = Color("TravelloCream")
+        static let sand     = Color("TravelloSand")
+        static let paper    = Color("TravelloPaper")
+        static let elevated = Color("TravelloElevated")
 
         // ── Text ─────────────────────────────────────────────
+        //  TravelloInk             #2A1F12       #F4EBDD
+        //  TravelloInkSoft         #4A3B28       #C9B89A
+        //  TravelloMute            #7A6B58       #B5A48E
+        //  TravelloTertiary        #A89989       #7A6B58
 
-        /// Основной текст — почти-чёрный с тёплым подтоном.
-        static let ink = Color(uiColor: UIColor { trait in
-            trait.userInterfaceStyle == .dark
-                ? UIColor(hex: 0xF4EBDD)
-                : UIColor(hex: 0x2A1F12)
-        })
-
-        /// Вторичный текст — для подписей и метаданных.
-        static let inkSoft = Color(uiColor: UIColor { trait in
-            trait.userInterfaceStyle == .dark
-                ? UIColor(hex: 0xC9B89A)
-                : UIColor(hex: 0x4A3B28)
-        })
-
-        /// Приглушённый текст — eyebrow-надписи, captions.
-        static let mute = Color(uiColor: UIColor { trait in
-            trait.userInterfaceStyle == .dark
-                ? UIColor(hex: 0xB5A48E)
-                : UIColor(hex: 0x7A6B58)
-        })
-
-        /// Третичный текст — disabled и фоновые подсказки.
-        static let tertiary = Color(uiColor: UIColor { trait in
-            trait.userInterfaceStyle == .dark
-                ? UIColor(hex: 0x7A6B58)
-                : UIColor(hex: 0xA89989)
-        })
+        static let ink      = Color("TravelloInk")
+        static let inkSoft  = Color("TravelloInkSoft")
+        static let mute     = Color("TravelloMute")
+        static let tertiary = Color("TravelloTertiary")
 
         // ── Accents ──────────────────────────────────────────
+        //  TravelloTerra           #D8743A       #E89968
+        //  TravelloOlive           #5A8C66       #9FC4A8
+        //
+        //  apricot, honey, burnt — одинаковы в обеих темах,
+        //  поэтому заданы hex прямо здесь (без Asset).
 
-        /// Главный акцент — терракота / закат.
-        static let terra = Color(uiColor: UIColor { trait in
-            trait.userInterfaceStyle == .dark
-                ? UIColor(hex: 0xE89968)
-                : UIColor(hex: 0xD8743A)
-        })
-
-        /// Светлый оранжевый — для градиентов и подсветки.
-        static let apricot = Color(uiColor: UIColor(hex: 0xE89968))
-
-        /// Тёплый кремово-золотой — для подложек и теней.
-        static let honey = Color(uiColor: UIColor(hex: 0xE0BC8E))
-
-        /// Оливковый — успешные состояния, статус online.
-        static let olive = Color(uiColor: UIColor { trait in
-            trait.userInterfaceStyle == .dark
-                ? UIColor(hex: 0x9FC4A8)
-                : UIColor(hex: 0x5A8C66)
-        })
-
-        /// Жжёный — глубокие акценты, hover.
-        static let burnt = Color(uiColor: UIColor(hex: 0x8B5424))
+        static let terra    = Color("TravelloTerra")
+        static let apricot  = Color(hex: 0xE89968)
+        static let honey    = Color(hex: 0xE0BC8E)
+        static let olive    = Color("TravelloOlive")
+        static let burnt    = Color(hex: 0x8B5424)
 
         // ── Lines & dividers ─────────────────────────────────
+        //  TravelloLine            #E8DDD0       #3A2F22
+        //  TravelloHairline        #F0E5D5       #2D2419
 
-        /// Линии-разделители (тонкие, заметные).
-        static let line = Color(uiColor: UIColor { trait in
-            trait.userInterfaceStyle == .dark
-                ? UIColor(hex: 0x3A2F22)
-                : UIColor(hex: 0xE8DDD0)
-        })
-
-        /// Линии-волоски (минимальная видимость).
-        static let hairline = Color(uiColor: UIColor { trait in
-            trait.userInterfaceStyle == .dark
-                ? UIColor(hex: 0x2D2419)
-                : UIColor(hex: 0xF0E5D5)
-        })
+        static let line     = Color("TravelloLine")
+        static let hairline = Color("TravelloHairline")
 
         // ── Status ───────────────────────────────────────────
 
-        static let success = olive
-        static let warning = Color(uiColor: UIColor(hex: 0xBA7517))
-        static let danger  = Color(uiColor: UIColor(hex: 0xA02525))
+        static let success  = olive
+        static let warning  = Color(hex: 0xBA7517)
+        static let danger   = Color(hex: 0xA02525)
     }
 }
 
 // ============================================================
-// UIColor hex helper
+// Color hex helper — без UIKit
 // ============================================================
 
-extension UIColor {
-    convenience init(hex: UInt32, alpha: CGFloat = 1.0) {
-        let r = CGFloat((hex >> 16) & 0xFF) / 255.0
-        let g = CGFloat((hex >>  8) & 0xFF) / 255.0
-        let b = CGFloat( hex        & 0xFF) / 255.0
-        self.init(red: r, green: g, blue: b, alpha: alpha)
+extension Color {
+    init(hex: UInt32, alpha: Double = 1.0) {
+        self.init(
+            .sRGB,
+            red:     Double((hex >> 16) & 0xFF) / 255,
+            green:   Double((hex >>  8) & 0xFF) / 255,
+            blue:    Double( hex        & 0xFF) / 255,
+            opacity: alpha
+        )
     }
 }

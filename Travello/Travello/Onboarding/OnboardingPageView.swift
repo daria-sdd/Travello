@@ -24,7 +24,7 @@ struct OnboardingPageView: View {
             // ── Editorial header: number + label ──
             VStack(alignment: .leading, spacing: 4) {
                 Text(page.number)
-                    .font(.custom("Fraunces-LightItalic", size: 80))
+                    .font(.custom("Fraunces72pt-LightItalic", size: 80))
                     .foregroundColor(.Travello.terra.opacity(0.18))
                     .lineLimit(1)
                     .padding(.top, Spacing.lg)
@@ -99,7 +99,7 @@ struct DropCapText: View {
         return AnyView(
             HStack(alignment: .firstTextBaseline, spacing: 4) {
                 Text(String(first))
-                    .font(.custom("Fraunces-LightItalic", size: 32))
+                    .font(.custom("Fraunces72pt-LightItalic", size: 32))
                     .foregroundColor(.Travello.terra)
                     .baselineOffset(-4)
 

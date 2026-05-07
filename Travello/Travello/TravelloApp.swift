@@ -1,4 +1,5 @@
 import SwiftUI
+import Combine
 
 // ============================================================
 // TRAVELLO APP
@@ -12,7 +13,6 @@ struct TravelloApp: App {
     @AppStorage("preferredColorScheme") private var schemeRaw: String = "auto"
 
     init() {
-        // Регистрируем кастомные шрифты при старте
         FontRegistrar.registerAll()
     }
 
@@ -29,14 +29,13 @@ struct TravelloApp: App {
         switch schemeRaw {
         case "light": return .light
         case "dark":  return .dark
-        default:      return nil   // .auto = follow system
+        default:      return nil
         }
     }
 }
 
 // ============================================================
 // APP STATE
-// Глобальное состояние приложения — auth, выбранный таб и т.д.
 // ============================================================
 
 final class AppState: ObservableObject {
@@ -44,10 +43,10 @@ final class AppState: ObservableObject {
     @Published var selectedTab: AppTab = .home
 
     enum AuthStage {
-        case checking          // проверяем сохранённый токен
-        case unauthenticated   // показать Auth + Onboarding
-        case onboarding        // показать Onboarding
-        case authenticated     // показать главное приложение
+        case checking
+        case unauthenticated
+        case onboarding
+        case authenticated
     }
 
     init() {
@@ -56,8 +55,6 @@ final class AppState: ObservableObject {
 
     @MainActor
     func checkAuth() async {
-        // TODO: проверить Keychain на наличие JWT
-        // и валидность токена через API call /auth/me
         try? await Task.sleep(for: .milliseconds(300))
         authStage = .unauthenticated
     }
@@ -74,14 +71,12 @@ final class AppState: ObservableObject {
 
     @MainActor
     func signOut() {
-        // TODO: очистить Keychain
         authStage = .unauthenticated
     }
 }
 
 // ============================================================
 // ROOT VIEW
-// Переключает корневой экран в зависимости от auth-стадии.
 // ============================================================
 
 struct RootView: View {
@@ -111,7 +106,6 @@ struct RootView: View {
 
 // ============================================================
 // SPLASH
-// Минимальный лого-экран на момент проверки auth.
 // ============================================================
 
 struct SplashView: View {
@@ -127,13 +121,10 @@ struct SplashView: View {
 }
 
 // ============================================================
-// PLACEHOLDERS — будут заменены реальными View в следующих файлах
+// PLACEHOLDERS
 // ============================================================
 
-/// Реальная реализация — в Features/Auth/AuthScreen.swift
 typealias AuthView = AuthScreen
-
-/// Реальная реализация — в Features/Onboarding/OnboardingScreen.swift
 typealias OnboardingView = OnboardingScreen
 
 struct MainView: View {
@@ -141,7 +132,6 @@ struct MainView: View {
 
     var body: some View {
         ZStack(alignment: .bottom) {
-            // Контент активного таба
             Group {
                 switch appState.selectedTab {
                 case .home:    HomeScreen()
@@ -151,7 +141,6 @@ struct MainView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
 
-            // Кастомный TabBar поверх контента
             TravelloTabBar(selection: $appState.selectedTab)
         }
         .ignoresSafeArea(.keyboard)

@@ -1,4 +1,5 @@
 import SwiftUI
+import Combine
 import MapKit
 
 // ============================================================
@@ -77,7 +78,7 @@ struct RouteVariantsView: View {
                             VariantCard(
                                 route:       route,
                                 index:       idx,
-                                isRecommended: idx == 1,   // средний вариант = «выбор редактора»
+                                isRecommended: idx == 1   // средний вариант = «выбор редактора»
                             ) {
                                 Haptics.medium()
                                 selectedRoute = route

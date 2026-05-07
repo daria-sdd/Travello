@@ -124,7 +124,7 @@ private struct FlightPort: View {
     var trailing: Bool = false
     var body: some View {
         VStack(alignment: trailing ? .trailing : .leading, spacing: 2) {
-            Text(code).font(.custom("Fraunces-Medium", size: 22)).foregroundColor(.Travello.ink)
+            Text(code).font(.custom("Fraunces72pt-SemiBold", size: 22)).foregroundColor(.Travello.ink)
             Text(city).font(.Travello.caption).foregroundColor(.Travello.mute)
             Text(time).font(.Travello.bodyBold).foregroundColor(.Travello.ink).padding(.top, 4)
             Text(date).eyebrowSmall()
@@ -229,7 +229,7 @@ struct PlaceBookingCard: View {
             // Обложка с тегом
             ZStack(alignment: .bottomLeading) {
                 LinearGradient(
-                    colors: [Color(uiColor: .init(hex: 0xC7A584)), Color(uiColor: .init(hex: 0x8B6A4F))],
+                    colors: [Color(hex: 0xC7A584), Color(hex: 0x8B6A4F)],
                     startPoint: .topLeading, endPoint: .bottomTrailing
                 )
                 .frame(height: 100)
@@ -398,7 +398,7 @@ struct RestaurantBookingCard: View {
             // Обложка
             ZStack(alignment: .bottomLeading) {
                 LinearGradient(
-                    colors: [Color(uiColor: .init(hex: 0xF4C36F)), Color(uiColor: .init(hex: 0xE8A53A))],
+                    colors: [Color(hex: 0xF4C36F), Color(hex: 0xE8A53A)],
                     startPoint: .topLeading, endPoint: .bottomTrailing
                 )
                 .frame(height: 90)

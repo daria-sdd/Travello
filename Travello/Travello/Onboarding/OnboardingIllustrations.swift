@@ -33,21 +33,21 @@ struct OnboardingIllustration: View {
         switch kind {
         case .search:
             LinearGradient(
-                colors: [Color(uiColor: UIColor(hex: 0xFCE4CC)), Color.Travello.apricot],
+                colors: [Color(hex: 0xFCE4CC), Color.Travello.apricot],
                 startPoint: .topLeading,
-                endPoint: .bottomTrailing,
+                endPoint: .bottomTrailing
             )
         case .map:
             LinearGradient(
-                colors: [Color(uiColor: UIColor(hex: 0xB8DCC2)), Color.Travello.olive],
+                colors: [Color(hex: 0xB8DCC2), Color.Travello.olive],
                 startPoint: .topLeading,
-                endPoint: .bottomTrailing,
+                endPoint: .bottomTrailing
             )
         case .bell:
             LinearGradient(
-                colors: [Color(uiColor: UIColor(hex: 0xF4D1A6)), Color.Travello.honey],
+                colors: [Color(hex: 0xF4D1A6), Color.Travello.honey],
                 startPoint: .topLeading,
-                endPoint: .bottomTrailing,
+                endPoint: .bottomTrailing
             )
         }
     }
@@ -129,16 +129,16 @@ private struct MapIllust: View {
                     path.move(to: CGPoint(x: 30, y: 60))
                     path.addQuadCurve(
                         to: CGPoint(x: 140, y: 90),
-                        control: CGPoint(x: 80, y: 30),
+                        control: CGPoint(x: 80, y: 30)
                     )
                     path.addQuadCurve(
                         to: CGPoint(x: 220, y: 120),
-                        control: CGPoint(x: 180, y: 70),
+                        control: CGPoint(x: 180, y: 70)
                     )
                 }
                 .stroke(
                     Color.white,
-                    style: StrokeStyle(lineWidth: 2, lineCap: .round, dash: [4, 5]),
+                    style: StrokeStyle(lineWidth: 2, lineCap: .round, dash: [4, 5])
                 )
                 .opacity(animateIn ? 0.9 : 0)
                 .animation(Anim.smooth.delay(0.4), value: animateIn)
@@ -147,12 +147,12 @@ private struct MapIllust: View {
                     path.move(to: CGPoint(x: 50, y: 130))
                     path.addQuadCurve(
                         to: CGPoint(x: 160, y: 150),
-                        control: CGPoint(x: 100, y: 110),
+                        control: CGPoint(x: 100, y: 110)
                     )
                 }
                 .stroke(
                     Color.white,
-                    style: StrokeStyle(lineWidth: 2, lineCap: .round, dash: [4, 5]),
+                    style: StrokeStyle(lineWidth: 2, lineCap: .round, dash: [4, 5])
                 )
                 .opacity(animateIn ? 0.9 : 0)
                 .animation(Anim.smooth.delay(0.5), value: animateIn)
@@ -198,19 +198,19 @@ private struct MapPin: View {
                 path.addCurve(
                     to: CGPoint(x: 0, y: w/2),
                     control1: CGPoint(x: w/2, y: h * 0.7),
-                    control2: CGPoint(x: 0, y: h * 0.7),
+                    control2: CGPoint(x: 0, y: h * 0.7)
                 )
                 path.addArc(
                     center: CGPoint(x: w/2, y: w/2),
                     radius: w/2,
                     startAngle: .degrees(180),
                     endAngle: .degrees(0),
-                    clockwise: false,
+                    clockwise: false
                 )
                 path.addCurve(
                     to: CGPoint(x: w/2, y: h),
                     control1: CGPoint(x: w, y: h * 0.7),
-                    control2: CGPoint(x: w/2, y: h * 0.7),
+                    control2: CGPoint(x: w/2, y: h * 0.7)
                 )
             }
             .fill(Color.Travello.terra)
@@ -251,7 +251,7 @@ private struct BellIllust: View {
             // Пузырь 1 — справа сверху
             NotificationBubble(
                 eyebrow: "СОВЕТ ДНЯ",
-                text: "Дождь после 15:00 — успейте на пляж утром",
+                text: "Дождь после 15:00 — успейте на пляж утром"
             )
             .frame(width: 130)
             .offset(x: 60, y: -50)
@@ -262,7 +262,7 @@ private struct BellIllust: View {
             // Пузырь 2 — слева снизу
             NotificationBubble(
                 eyebrow: "ЧЕРЕЗ 24Ч",
-                text: "Открылась регистрация на TK412",
+                text: "Открылась регистрация на TK412"
             )
             .frame(width: 130)
             .offset(x: -55, y: 50)
@@ -297,7 +297,7 @@ private struct NotificationBubble: View {
         .padding(.vertical, 9)
         .background(
             RoundedRectangle(cornerRadius: 14)
-                .fill(Color.white),
+                .fill(Color.white)
         )
         .shadow(color: Color.black.opacity(0.1), radius: 12, x: 0, y: 4)
     }

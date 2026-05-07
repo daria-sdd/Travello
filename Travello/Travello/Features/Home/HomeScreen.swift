@@ -1,4 +1,5 @@
 import SwiftUI
+import Combine
 
 // ============================================================
 // HOME SCREEN
@@ -119,7 +120,7 @@ struct CountdownBlock: View {
             Text("до \((route.days.first?.city ?? "поездки").lowercased())").eyebrow(.Travello.honey)
             HStack(alignment: .firstTextBaseline, spacing: Spacing.xs) {
                 Text("\(daysLeft)")
-                    .font(.custom("Fraunces-LightItalic", size: 56)).foregroundColor(.white)
+                    .font(.custom("Fraunces72pt-LightItalic", size: 56)).foregroundColor(.white)
                 Text(pluralDays(daysLeft)).font(.Travello.h2).foregroundColor(.Travello.honey)
             }
             if let ev = route.nextEvent, let t = ev.timeString {
@@ -161,7 +162,7 @@ struct CreateRoutePromo: View {
             }
             Spacer()
             Text("+")
-                .font(.custom("Fraunces-Light", size: 40)).foregroundColor(.Travello.terra)
+                .font(.custom("Fraunces72pt-Light", size: 40)).foregroundColor(.Travello.terra)
                 .frame(width: 56, height: 56)
                 .background(Circle().fill(Color.Travello.sand))
                 .overlay(Circle().stroke(Color.Travello.terra, lineWidth: Stroke.hairline))
@@ -178,8 +179,8 @@ struct TripRow: View {
     let route: Route; let index: Int
     private let gradients: [(Color, Color)] = [
         (.Travello.apricot, .Travello.terra),
-        (.init(uiColor: .init(hex: 0x9FC4A8)), .Travello.olive),
-        (.init(uiColor: .init(hex: 0xF4D1A6)), .Travello.honey),
+        (Color(hex: 0x9FC4A8), .Travello.olive),
+        (Color(hex: 0xF4D1A6), .Travello.honey),
     ]
     var body: some View {
         HStack(spacing: Spacing.md) {

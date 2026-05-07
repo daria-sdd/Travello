@@ -76,6 +76,10 @@ wayai:
 
   firebase:
     credentials-path: ${FIREBASE_CREDENTIALS_PATH:firebase-adminsdk.json}
+    web-api-key: ${FIREBASE_WEB_API_KEY}
+
+  ai-service:
+    url: ${AI_SERVICE_URL:http://localhost:8081}
 
   aws:
     region: ${AWS_REGION:eu-central-1}

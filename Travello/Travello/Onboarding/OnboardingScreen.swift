@@ -32,14 +32,14 @@ struct OnboardingScreen: View {
                     if index >= currentIndex {
                         OnboardingPageView(
                             page: pages[index],
-                            isActive: index == currentIndex,
+                            isActive: index == currentIndex
                         )
                         .zIndex(Double(pages.count - index))
                         .modifier(
                             BookFlipModifier(
                                 isFlipping: index == currentIndex,
-                                progress: index == currentIndex ? flipProgress : 0,
-                            ),
+                                progress: index == currentIndex ? flipProgress : 0
+                            )
                         )
                     }
                 }
@@ -63,7 +63,7 @@ struct OnboardingScreen: View {
                                 dragOffset = 0
                             }
                         }
-                    },
+                    }
             )
 
             // ── Низ: индикатор + кнопка ──
@@ -75,7 +75,7 @@ struct OnboardingScreen: View {
 
                     PrimaryButton(
                         title: isLastPage ? "Начать путешествие" : "Дальше",
-                        action: handleNextTap,
+                        action: handleNextTap
                     )
                 }
                 .padding(.horizontal, Spacing.screenPadding)
@@ -152,10 +152,10 @@ struct BookFlipModifier: ViewModifier {
                     LinearGradient(
                         colors: [
                             Color.black.opacity(0.0),
-                            Color.black.opacity(0.15 * progress),
+                            Color.black.opacity(0.15 * progress)
                         ],
                         startPoint: .leading,
-                        endPoint: .trailing,
+                        endPoint: .trailing
                     )
                     .frame(width: 60)
                     .allowsHitTesting(false)
@@ -165,13 +165,13 @@ struct BookFlipModifier: ViewModifier {
                     .degrees(-160 * Double(progress)),
                     axis: (x: 0, y: 1, z: 0),
                     anchor: .leading,
-                    perspective: 0.7,
+                    perspective: 0.7
                 )
                 .shadow(
                     color: Color.black.opacity(0.15 * progress),
                     radius: 20 * progress,
                     x: -5 * progress,
-                    y: 0,
+                    y: 0
                 )
         } else {
             content

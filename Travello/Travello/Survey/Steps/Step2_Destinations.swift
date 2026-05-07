@@ -2,9 +2,6 @@ import SwiftUI
 
 // ============================================================
 // STEP 2 — DESTINATIONS
-// Пользователь добавляет направления в список.
-// Порядок меняется через drag-and-drop (List с .onMove).
-// Можно пропустить — ИИ выберет сам.
 // ============================================================
 
 struct Step2_Destinations: View {
@@ -17,7 +14,6 @@ struct Step2_Destinations: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
 
-            // ── Подсказка ─────────────────────────────────────
             Text("Добавьте одно или несколько направлений.\nМожно оставить пустым — ИИ подберёт лучший вариант.")
                 .font(.Travello.italic)
                 .foregroundColor(.Travello.mute)
@@ -26,12 +22,10 @@ struct Step2_Destinations: View {
 
             SoftRule().padding(.top, Spacing.xl)
 
-            // ── Список направлений ────────────────────────────
             if state.destinations.isEmpty {
                 EmptyDestinations()
                     .padding(.top, Spacing.xxl)
             } else {
-                // EditableList с drag-to-reorder
                 List {
                     ForEach(state.destinations) { dest in
                         DestinationRow(destination: dest) {
@@ -49,12 +43,14 @@ struct Step2_Destinations: View {
                 }
                 .listStyle(.plain)
                 .frame(height: min(CGFloat(state.destinations.count) * 70 + 8, 280))
-                .environment(\.editMode, .constant(.active))   // всегда в режиме редактирования для drag
+#if os(iOS)
+                // editMode нужен для drag-to-reorder — доступен только на iOS
+                .environment(\.editMode, .constant(.active))
+#endif
             }
 
             SoftRule().padding(.top, Spacing.lg)
 
-            // ── Форма добавления ──────────────────────────────
             if showInput {
                 addInputView
                     .transition(.opacity.combined(with: .move(edge: .bottom)))
@@ -87,7 +83,6 @@ struct Step2_Destinations: View {
             EyebrowLine(text: "новое направление")
                 .padding(.top, Spacing.lg)
 
-            // Поле ввода
             HStack(spacing: Spacing.sm) {
                 TextField("", text: $newName)
                     .font(.Travello.h3)
@@ -118,7 +113,6 @@ struct Step2_Destinations: View {
                 Rectangle().fill(Color.Travello.ink).frame(height: Stroke.hairline)
             }
 
-            // Тип направления
             HStack(spacing: Spacing.sm) {
                 ForEach(SurveyDestination.DestinationType.allCases, id: \.self) { type in
                     Button {
@@ -145,7 +139,6 @@ struct Step2_Destinations: View {
                 }
             }
 
-            // Кнопка отмены
             Button {
                 withAnimation(Anim.spring) {
                     showInput = false; newName = ""; inputFocused = false
@@ -178,7 +171,6 @@ private struct DestinationRow: View {
 
     var body: some View {
         HStack(spacing: Spacing.md) {
-            // Drag handle — показывается автоматически в .active editMode
             Image(systemName: "line.3.horizontal")
                 .font(.system(size: 13, weight: .light))
                 .foregroundColor(.Travello.tertiary)
@@ -199,45 +191,43 @@ private struct DestinationRow: View {
             Button(action: onDelete) {
                 Image(systemName: "xmark")
                     .font(.system(size: 11, weight: .medium))
-                    .foregroundColor(.Travello.mute)
-                    .frame(width: 26, height: 26)
+                    .foregroundColor(.Travello.tertiary)
+                    .frame(width: 28, height: 28)
                     .background(Circle().fill(Color.Travello.sand))
             }
             .buttonStyle(.plain)
         }
-        .padding(.horizontal, Spacing.md)
-        .padding(.vertical, Spacing.md)
-        .background(
-            RoundedRectangle(cornerRadius: Radius.md)
-                .fill(Color.Travello.paper)
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: Radius.md)
-                .stroke(Color.Travello.line, lineWidth: Stroke.hairline)
-        )
+        .padding(.vertical, Spacing.sm)
     }
 }
 
-// ─── EMPTY STATE ─────────────────────────────────────────────
+// ─── EMPTY STATE ──────────────────────────────────────────────
 
 private struct EmptyDestinations: View {
     var body: some View {
         VStack(spacing: Spacing.md) {
             Text("✈")
-                .font(.system(size: 40))
+                .font(.system(size: 32))
                 .foregroundColor(.Travello.tertiary)
 
-            Text("Куда полетим?")
+            Text("Пока пусто")
                 .font(.Travello.italic)
                 .foregroundColor(.Travello.mute)
 
-            Text("Добавьте страну или город. Или пропустите — ИИ выберет лучший вариант под ваш бюджет.")
+            Text("ИИ подберёт лучшее направление сам,\nили добавьте своё ниже")
                 .font(.Travello.caption)
                 .foregroundColor(.Travello.tertiary)
                 .multilineTextAlignment(.center)
                 .lineSpacing(3)
         }
         .frame(maxWidth: .infinity)
-        .padding(Spacing.xl)
     }
+}
+
+// ─── PREVIEW ──────────────────────────────────────────────────
+
+#Preview {
+    Step2_Destinations(state: SurveyState())
+        .padding()
+        .background(Color.Travello.cream)
 }

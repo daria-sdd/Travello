@@ -77,7 +77,7 @@ private struct TabButton: View {
                 // Морфинг: italic → regular при активации
                 Text(tab.glyph)
                     .font(.custom(
-                        isSelected ? "Fraunces-Medium" : "Fraunces-LightItalic",
+                        isSelected ? "Fraunces72pt-SemiBold" : "Fraunces72pt-LightItalic",
                         size: 18
                     ))
                     .foregroundColor(isSelected ? .Travello.terra : .Travello.tertiary)

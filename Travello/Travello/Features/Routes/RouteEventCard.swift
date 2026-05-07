@@ -200,7 +200,7 @@ import MapKit
         bookingRef: nil,
         aiTip: "Берите столик на террасе — вид на яхты просто потрясающий"
     )
-    return VStack {
+    VStack {
         RouteEventCard(event: event, isLast: false)
         RouteEventCard(event: event, isLast: true)
     }

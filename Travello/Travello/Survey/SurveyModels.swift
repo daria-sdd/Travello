@@ -1,5 +1,6 @@
 import SwiftUI
 import Foundation
+import Combine
 
 // ============================================================
 // SURVEY MODELS
@@ -70,10 +71,10 @@ struct SurveyBudget: Equatable {
         var id: String { rawValue }
         var icon: String {
             switch self {
-            case .flights: return "airplane"
+            case .flights:       return "airplane"
             case .accommodation: return "bed.double"
-            case .food: return "fork.knife"
-            case .activities: return "ticket"
+            case .food:          return "fork.knife"
+            case .activities:    return "ticket"
             }
         }
     }
@@ -87,7 +88,7 @@ struct SurveyTag: Identifiable, Equatable {
         .init(id: "history",      label: "история",        emoji: "🏛"),
         .init(id: "food",         label: "местная кухня",  emoji: "🍜"),
         .init(id: "nature",       label: "природа",        emoji: "🌿"),
-        .init(id: "architecture", label: "архитектура",     emoji: "🏰"),
+        .init(id: "architecture", label: "архитектура",    emoji: "🏰"),
         .init(id: "shopping",     label: "шопинг",         emoji: "🛍"),
         .init(id: "nightlife",    label: "ночная жизнь",   emoji: "🎶"),
         .init(id: "spa",          label: "спа и релакс",   emoji: "🧖"),
@@ -130,7 +131,9 @@ final class SurveyState: ObservableObject {
             dateFrom:       dateFrom.map { fmt.string(from: $0) },
             dateTo:         dateTo.map   { fmt.string(from: $0) },
             flexibleDates:  flexibleDates,
-            destinations:   destinations.map { DestinationRequestDTO(name: $0.name, type: $0.type.rawValue.lowercased()) },
+            destinations:   destinations.map {
+                DestinationRequestDTO(name: $0.name, type: $0.type.rawValue.lowercased())
+            },
             budgetAmount:   budget.amount,
             budgetCurrency: budget.currency,
             budgetIncludes: budget.includes.map { $0.rawValue.lowercased() },

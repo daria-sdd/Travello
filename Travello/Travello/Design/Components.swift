@@ -76,7 +76,7 @@ struct DarkButton: View {
             .padding(.vertical, 14)
             .background(
                 Capsule()
-                    .fill(Color(uiColor: .label))    // адаптируется к теме
+                    .fill(Color.primary)    // адаптируется к теме
             )
         }
     }
@@ -268,7 +268,7 @@ struct EditorialNumeral: View {
 
     var body: some View {
         Text(String(format: "%02d", value))
-            .font(.custom("Fraunces-LightItalic", size: size))
+            .font(.custom("Fraunces72pt-LightItalic", size: size))
             .foregroundColor(color)
             .lineLimit(1)
     }

@@ -1,4 +1,5 @@
 import SwiftUI
+import Combine
 import MapKit
 
 // ============================================================
@@ -189,7 +190,7 @@ struct PlaneAnimation: View {
 
             // Самолёт по орбите
             Text("✈")
-                .font(.custom("Fraunces-Light", size: 28))
+                .font(.custom("Fraunces72pt-Light", size: 28))
                 .foregroundColor(.Travello.terra)
                 .offset(x: 50)
                 .rotationEffect(.degrees(angle), anchor: .center)

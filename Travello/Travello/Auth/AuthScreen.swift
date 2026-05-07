@@ -61,7 +61,7 @@ struct AuthScreen: View {
                     DarkButton(
                         title: "Войти через Apple",
                         action: { Task { await signIn() } },
-                        systemIcon: "applelogo",
+                        systemIcon: "applelogo"
                     )
                     .opacity(isAuthenticating ? 0.5 : 1.0)
                     .disabled(isAuthenticating)

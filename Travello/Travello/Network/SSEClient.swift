@@ -51,7 +51,7 @@ final class SSEClient {
             // Fallback для локальной разработки
             await connect(
                 url: URL(string: "http://localhost:8080")!.appendingPathComponent(endpoint.path),
-                continuation: continuation,
+                continuation: continuation
             )
             return
         }

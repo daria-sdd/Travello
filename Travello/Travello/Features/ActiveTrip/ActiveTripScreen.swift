@@ -1,4 +1,5 @@
 import SwiftUI
+import Combine
 
 // ============================================================
 // ACTIVE TRIP SCREEN
@@ -110,7 +111,7 @@ struct ActiveTripScreen: View {
         .background(RoundedRectangle(cornerRadius: Radius.lg).fill(Color.Travello.terra))
         .overlay(alignment: .bottomTrailing) {
             Text(event.timeString ?? "")
-                .font(.custom("Fraunces-LightItalic", size: 28))
+                .font(.custom("Fraunces72pt-LightItalic", size: 28))
                 .foregroundColor(.white.opacity(0.35))
                 .padding(Spacing.md)
         }
